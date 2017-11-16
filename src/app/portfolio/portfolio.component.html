@@ -1,0 +1,61 @@
+<div *ngIf="portfolioDataFetched && !portfolioEmpty">
+  <div class="row">
+      <div class="col">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-body">
+            <h1 class="card-text text-center"*ngIf="totalMarketValue">{{isNumber(totalMarketValue) ? (totalMarketValue | currency:'USD':true | moneyAbbreviate) : totalMarketValue}}</h1>
+            <h3 class="card-text text-center">Total Market Value</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3">
+          <div class="card-body text-success" id="portfolio-total-day-change">
+            <h1 class="card-text text-center" *ngIf="totalDayChange">{{isNumber(totalDayChange) ? (formatPortfolioTotalDayChange(totalDayChange) | currency:'USD':true) : totalDayChange}}</h1>
+            <h3 class="card-text text-center">Total Day Change</h3>
+          </div>
+        </div>
+      </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+      <div class="col-md-6" style="display: inline">
+        <h3 class="text-center ">Market Value by Watchlist</h3>
+        <canvas baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    [options]="tooltipConfig">
+        </canvas>
+      </div>
+      <div class="col-md-6" style="display: inline">
+        <h3 class="text-center">Day Change by Watchlist</h3>
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="portfolioEmpty">
+    <div class="row">
+
+      <div class="card text-center intro-card">
+        <div class="card-header">
+          Stock Monitor
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Welcome!</h4>
+          <p class="card-text">Start by creating one or more watchlists inside which you can add company stocks. This page will display your portfolio stats.</p>
+        </div>
+        <div class="card-footer text-muted">
+          Made with 💙
+        </div>
+      </div>
+
+    </div>
+</div>

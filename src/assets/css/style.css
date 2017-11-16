@@ -1,0 +1,49 @@
+/* YOUR CUSTOM STYLES */
+
+#selected-company {
+	visibility: hidden;
+}
+
+button.remove-stock {
+	margin: 0;
+	padding: 0;
+}
+
+button.add-stock {
+	float: right;
+	margin-right: 0.5%;
+}
+
+div.watchlist-sidebar-item {
+	display: flex;
+}
+
+div.watchlist-sidebar-item > a {
+	width: 100%;
+}
+
+button.remove-sidebar {
+	text-align: right;
+	cursor: pointer;
+}
+
+div.card-body {
+	padding: 3.25rem;
+}
+
+div.intro-card {
+	margin: 0 auto;
+}
+
+a.dropdown-item, a.nav-link, a.dropdown-menu, a.navbar-brand {
+	color: #2196f3 !important;
+}
+
+a.dropdown-item:hover {
+	color: #0056b3 !important;
+}
+
+a.dropdown-item:active {
+	color: #fff !important;
+	background-color: #2196f3 !important;
+}

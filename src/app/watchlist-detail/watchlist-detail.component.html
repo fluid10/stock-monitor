@@ -1,0 +1,69 @@
+<div *ngIf="watchlist">
+	<h3>{{watchlist.watchlist_name}}</h3>
+	<input type="hidden" value={{watchlist._id}} id="watchlist-id">
+	<br>
+	<table class="table table-hover">
+	  <thead>
+	    <tr>
+	      <th>Symbol</th>
+	      <th>Shares Owned</th>
+	      <th>Last Price</th>
+	      <th>Price Change</th>
+	      <th>Market Value</th>
+	      <th>Day Change</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let stock of watchlist.stocks; let i = index">
+	      <td>{{stock.symbol}}</td>
+	      <td (click)="updateModal(stock)" data-toggle="modal" data-target="#exampleModal">
+		      {{stock.shares_owned}}
+				</td>
+	      <td id={{i}}-last-price>{{isNumber(stock.last_price) ? (formatLastPrice(i, stock.last_price, stock.price_change) | currency:'USD':true) : stock.last_price}}</td>
+	      <td id={{i}}-price-change>{{formatPriceChange(i, stock.price_change)}}</td>
+	      <td>{{isNumber(stock.market_value) ? ('$' + stock.market_value) : stock.market_value}}</td>
+	      <td id={{i}}-day-change>{{isNumber(stock.day_change) ? (formatDayChange(i, stock.day_change) | currency:'USD':true) : stock.day_change }}</td>
+	      <td><button type="button" class="btn btn-primary remove-stock" (click)="removeCompany(watchlist._id, stock.symbol)">Remove</button></td>
+	    </tr>
+	    <tr>
+	    	<td>Totals</td>
+	    	<td>{{totalShares}}</td>
+	    	<td></td>
+	    	<td></td>
+	    	<td>{{isNumber(totalMarketValue) ? (totalMarketValue | currency:'USD':true | moneyAbbreviate) : totalMarketValue}}</td>
+	    	<td id="total-day-change">{{isNumber(totalDayChange) ? (formatTotalDayChange(totalDayChange) | currency:'USD':true | moneyAbbreviate) : totalDayChange}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<p>Click on Shares Owned cell to edit</p>
+	<p>{{newStock}}</p>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Number of Shares Owned</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1">Edit</span>
+					  <input type="text" class="form-control" placeholder="Shares Owned" value="{{stockShares}}" aria-label="Shares Owned" aria-describedby="basic-addon1" #newStockShares>
+					</div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateShares(watchlist._id, stockSymbol, newStockShares.value)">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+</div>

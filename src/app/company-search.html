@@ -1,0 +1,43 @@
+<div>
+  <button type="button" class="btn btn-primary add-stock" data-toggle="modal" data-target="#companySearchModal">
+    Add Stock
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="companySearchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Stock</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="input-group input-group-lg">
+            <input class="form-control" placeholder="Company Name and/or Symbol" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+          </div>
+          <div>
+            <div *ngFor="let company of companies | async" class="search-result" >
+              <span (click)="selectCompany(company.symbol)">{{company.symbol}} - {{company.name}}</span>
+            </div>
+          </div>
+          <br>
+          <div class="input-group input-group-lg">
+            <input class="form-control" #stockShares id="stock-shares" placeholder="Number of shares" />
+          </div>
+          <div id="selected-company"></div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addStock(searchBox.value, stockShares.value)">Add Stock</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <app-watchlist-detail [newstock]="newstock"></app-watchlist-detail>
+</div>
