@@ -16,5 +16,5 @@ Inside the new *dist* folder, open *index.html* and replace line 4 with `<base h
 
 ## Running the Application
 
-After doing the steps above, type this into the root directory of application: `npm run stock-monitor`
+After the steps above, type this into the root directory of application: `npm run stock-monitor`
 to run it.
